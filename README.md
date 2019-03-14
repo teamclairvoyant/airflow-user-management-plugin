@@ -1,4 +1,4 @@
-# airflow-user-management-plugin - IN PROGRESS
+# airflow-user-management-plugin
 
 ## Description
 

@@ -23,3 +23,7 @@ A plugin to Apache Airflow (Documentation: https://pythonhosted.org/airflow/, So
 2. Restart the Airflow Services
 
 3. Your done!
+
+## How to Use
+
+Once you've restarted the Web Application, you should now see a new Tab: Admin -> User Management. From here, you can create new users and update or delete existing ones.

@@ -2,7 +2,7 @@
 
 ## Description
 
-A plugin to Apache Airflow (Documentation: http://airflow.apache.org, Source Code: https://github.com/apache/airflow) to provide an interface where you can add a PasswordUser to Airflow and manage
+A plugin to Apache Airflow (Documentation: https://pythonhosted.org/airflow/, Source Code: https://github.com/apache/incubator-airflow) to provide an interface where you can add a PasswordUser to Airflow and manage
 
 ## How do Deploy
 
@@ -22,6 +22,10 @@ A plugin to Apache Airflow (Documentation: http://airflow.apache.org, Source Cod
 2. Restart the Airflow Services
 
 3. Your done!
+
+## How to Use
+
+Once you've restarted the Web Application, you should now see a new Tab: Admin -> User Management. From here, you can create new users and update or delete existing ones.
 
 ## Configuration
 * This plugin requires that you already have one Airflow user setup.  Please refer http://airflow.apache.org/security.html#password to know how to setup Airflow user.

@@ -93,7 +93,6 @@ class UserManagementModelView(ModelView):
 
     def on_model_change(self, form, model, is_created):
         logging.info("UserManagementModelView.on_model_change(form=" + str(form) + ", model=" + str(model) + ", is_created=" + str(is_created) + ")")
-        logging.info("Confirm Password:" + form.password_confirm.data )
         return super(UserManagementModelView, self).on_model_change(form, model, is_created)
 
     # Added the override for get_query so that the admin can see all the users while other's can see only their record displayed.

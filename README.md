@@ -2,7 +2,7 @@
 
 ## Description
 
-A plugin to Apache Airflow (Documentation: https://pythonhosted.org/airflow/, Source Code: https://github.com/apache/incubator-airflow) to provide an interface where you can add a PasswordUser to Airflow and manage
+A plugin to Apache Airflow (Documentation: https://airflow.apache.org/, Source Code: https://github.com/apache/airflow) to provide an interface where you can add a PasswordUser to Airflow and manage
 
 ## How do Deploy
 
@@ -40,4 +40,22 @@ Once you've restarted the Web Application, you should now see a new Tab: Admin -
         
 * For versions >= 2.0 you need to make sure the `superuser` attribute is set to `True` for the Airflow User. Please refer http://airflow.apache.org/_api/airflow/models/index.html#airflow.models.User for details.
 
-**Note:** `superuser` flag in the create/edit user form will be effective only from version >= 2.0 
+**Note:** `superuser` flag in the create/edit user form will be effective only from version >= 2.0
+
+####Known issues
+* **Issue**:  When you run the plugin with SQLAlchemy versions >= 1.2.x on Airflow versions < 1.10.x then you might run into the following `AttributeError` issue
+    
+        [2019-03-19 11:07:52,979] {user_management_plugin.py:71} INFO - UserManagementModelView.create_model(form=<flask_admin.contrib.sqla.form.PasswordUserForm object at 0x7fbf3362af90>)
+        [2019-03-19 11:07:52,979] {user_management_plugin.py:82} ERROR - Failed to create record.
+        Traceback (most recent call last):
+         File "/home/dillip/airflow/plugins/user_management_plugin.py", line 75, in create_model
+           form.populate_obj(model)
+         File "/home/dillip/.local/lib/python2.7/site-packages/wtforms/form.py", line 96, in populate_obj
+           field.populate_obj(obj, name)
+         File "/home/dillip/.local/lib/python2.7/site-packages/wtforms/fields/core.py", line 330, in populate_obj
+           setattr(obj, name, self.data)
+         File "/home/dillip/.local/lib/python2.7/site-packages/sqlalchemy/ext/hybrid.py", line 899, in __set__
+           raise AttributeError("can't set attribute")
+        AttributeError: can't set attribute 
+              
+    **Resolution**: Please use SQLAlchemy versions <= 1.1.18 to resolve the issue.

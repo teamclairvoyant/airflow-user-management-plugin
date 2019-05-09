@@ -74,7 +74,7 @@ class UserManagementModelView(ModelView):
     form_columns = ('username', 'email', 'password', 'password_confirm', 'superuser')
     form_extra_fields = {
         'password_confirm': PasswordField('Password (Confirm)'),
-        'superuser': BooleanField( 'superuser' )
+        'superuser': BooleanField( 'Is Superuser?' )
     }
     form_widget_args = {
         'password': {
@@ -85,6 +85,14 @@ class UserManagementModelView(ModelView):
     # form_args = dict(
     #     email=dict(validators=[])
     # )
+
+    #overrides BaseView method to show/hide the menu links dynamically
+    def is_visible(self):
+        return current_user.is_authenticated
+
+    #overrides BaseView method to check permission for the menu link
+    def is_accessible(self):
+        return current_user.is_authenticated
 
     def on_form_prefill(self, form, id):
         if (not is_super_user(self)):
@@ -140,11 +148,14 @@ class UserManagementModelView(ModelView):
             return False
 
     def update_model(self, form, model):
-        if form.password.data == form.password_confirm.data:
-            logging.info("UserManagementModelView.update_model(form=" + str(form) + ", model=" + str(model) + ")")
-            return super(UserManagementModelView, self).update_model(form, model)
+        if is_super_user(self) or form.username.data == current_user.user.username:
+            if form.password.data == form.password_confirm.data:
+                logging.info("UserManagementModelView.update_model(form=" + str(form) + ", model=" + str(model) + ")")
+                return super(UserManagementModelView, self).update_model(form, model)
+            else:
+                flash('Password and confirm password does not match', 'error')
         else:
-            flash('Password and confirm password does not match', 'error')
+            flash('Failed to Update user. Only admin/self user can update a user.', 'error')
 
     def delete_model(self, model):
         if is_super_user(self):

@@ -92,7 +92,25 @@ class UserManagementModelView(ModelView):
 
     #overrides BaseView method to check permission for the menu link
     def is_accessible(self):
+        if current_user.is_authenticated:
+            self.can_delete = True
+            self.can_create = True
+            if not is_super_user(self):
+                self.can_create = False
+                self.can_delete = False
+
         return current_user.is_authenticated
+
+    #overrides ModelView method to check default model actions
+    def is_action_allowed(self, name):
+        self.can_delete = True
+        self.can_create = True
+        if not is_super_user(self):
+            self.can_delete = False
+            self.can_create = False
+            return False
+
+        return True
 
     def on_form_prefill(self, form, id):
         if (not is_super_user(self)):

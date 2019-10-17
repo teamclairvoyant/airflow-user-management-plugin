@@ -6,7 +6,8 @@ A plugin to Apache Airflow (Documentation: https://airflow.apache.org/, Source C
 
 ### RBAC Support
 If you are using the Airflow versions 1.10.x and higher then this plugin is useful only when RBAC feature is disabled. 
-You can check the `rbac` setting in `airflow.cfg` config file under `webserver` category. 
+You can check the `rbac` setting in `airflow.cfg` config file under `webserver` category. When RBAC feature is enabled 
+you can manage users directly from the `Security` menu provided by Airflow UI.   
 
 **Note:** Once you enable the RBAC support, it will create new set of Database Tables. So, you need to manually 
 migrate your existing users from `users` table to the new table `ab_users`. While migrating you need to specify 

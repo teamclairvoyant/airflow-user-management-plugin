@@ -15,9 +15,10 @@ A plugin to Apache Airflow (Documentation: https://airflow.apache.org/, Source C
     * You may have to create the Airflow Plugins Directory folder as it is not created by default
     
     * quick way of doing this:
-    
+    ```bash
         $ cd {AIRFLOW_PLUGINS_FOLDER}
-        $ wget https://raw.githubusercontent.com/teamclairvoyant/airflow-user-management-plugin/master/user_management_plugin.py
+        $ wget https://raw.githubusercontent.com/teamclairvoyant/airflow-user-management-plugin/master/plugins/user_management_plugin.py
+     ```
  
 2. Restart the Airflow Services
 

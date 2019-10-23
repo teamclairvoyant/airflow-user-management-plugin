@@ -4,6 +4,15 @@
 
 A plugin to Apache Airflow (Documentation: https://airflow.apache.org/, Source Code: https://github.com/apache/airflow) to provide an interface where you can add a PasswordUser to Airflow and manage
 
+### RBAC Support
+If you are using the Airflow versions 1.10.x and higher then this plugin is useful only when RBAC feature is disabled. 
+You can check the `rbac` setting in `airflow.cfg` config file under `webserver` category. When RBAC feature is enabled 
+you can manage users directly from the `Security` menu provided by Airflow UI.   
+
+**Note:** Once you enable the RBAC support, it will create new set of Database Tables. So, you need to manually 
+migrate your existing users from `users` table to the new table `ab_users`. While migrating you need to specify 
+the role for each user. Please check [Create User](https://airflow.apache.org/cli.html#create_user) for more details.
+
 ## How do Deploy
 
 1. Copy the user_management_plugin.py file into the Airflow Plugins directory
@@ -15,9 +24,10 @@ A plugin to Apache Airflow (Documentation: https://airflow.apache.org/, Source C
     * You may have to create the Airflow Plugins Directory folder as it is not created by default
     
     * quick way of doing this:
-    
+    ```bash
         $ cd {AIRFLOW_PLUGINS_FOLDER}
-        $ wget https://raw.githubusercontent.com/teamclairvoyant/airflow-user-management-plugin/master/user_management_plugin.py
+        $ wget https://raw.githubusercontent.com/teamclairvoyant/airflow-user-management-plugin/master/plugins/user_management_plugin.py
+     ```
  
 2. Restart the Airflow Services
 

@@ -115,7 +115,7 @@ class UserManagementModelView(ModelView):
     def on_form_prefill(self, form, id):
         if (not is_super_user(self)):
             form.username.render_kw = {'readonly': True}
-            form.superuser.render_kw = {'readonly': True}
+            form.superuser.render_kw = {'disable': True}
 
     def on_model_change(self, form, model, is_created):
         logging.info("UserManagementModelView.on_model_change(form=" + str(form) + ", model=" + str(model) + ", is_created=" + str(is_created) + ")")
